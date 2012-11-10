@@ -1,0 +1,17 @@
+DEBUG main org.hibernate.event.internal.AbstractFlushingEventListener - Flushed: 0 (re)creations, 0 updates, 0 removals to 0 collections
+DEBUG main org.hibernate.internal.util.EntityPrinter - Listing entities:
+DEBUG main org.hibernate.internal.util.EntityPrinter - md.victordov.lab.vo.Curs{universitateId=2, profesorId=2, cursId=12, numeCurs=nume Acum}
+DEBUG main org.hibernate.internal.util.EntityPrinter - md.victordov.lab.vo.Curs{universitateId=1, profesorId=2, cursId=2, numeCurs=Mecanica}
+DEBUG main org.hibernate.SQL - insert into curs (nume_curs, u_id, p_id, c_id) values (?, ?, ?, ?)
+DEBUG main org.hibernate.engine.transaction.internal.jdbc.JdbcTransaction - committed JDBC Connection
+DEBUG main org.hibernate.event.internal.AbstractFlushingEventListener - Processing flush-time cascades
+DEBUG main org.hibernate.event.internal.AbstractFlushingEventListener - Dirty checking collections
+DEBUG main org.hibernate.event.internal.AbstractFlushingEventListener - Flushed: 0 insertions, 0 updates, 0 deletions to 2 objects
+DEBUG main org.hibernate.event.internal.AbstractFlushingEventListener - Flushed: 0 (re)creations, 0 updates, 0 removals to 0 collections
+DEBUG main org.hibernate.internal.util.EntityPrinter - Listing entities:
+DEBUG main org.hibernate.internal.util.EntityPrinter - md.victordov.lab.vo.Curs{universitateId=2, profesorId=2, cursId=12, numeCurs=nume Acum}
+DEBUG main org.hibernate.internal.util.EntityPrinter - md.victordov.lab.vo.Curs{universitateId=1, profesorId=2, cursId=2, numeCurs=Mecanica}
+DEBUG main org.hibernate.engine.jdbc.internal.JdbcCoordinatorImpl - HHH000420: Closing un-released batch
+DEBUG main org.hibernate.engine.jdbc.internal.LogicalConnectionImpl - Releasing JDBC connection
+DEBUG main org.hibernate.engine.jdbc.internal.LogicalConnectionImpl - Released JDBC connection
+DEBUG main org.hibernate.engine.jdbc.internal.proxy.ConnectionProxyHandler - HHH000163: Logical connection releasing its physical connection

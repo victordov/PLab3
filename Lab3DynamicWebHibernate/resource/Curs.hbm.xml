@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 7, 2012 10:55:58 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping package="md.victordov.lab.vo">
+	<class name="Curs" table="curs">
+		<id name="cursId" type="int">
+			<column name="c_id" />
+			<generator class="assigned" />
+		</id>
+		<property name="numeCurs" type="java.lang.String">
+			<column name="nume_curs" />
+		</property>
+		<property name="universitateId" type="int">
+			<column name="u_id" />
+		</property>
+		<property name="profesorId" type="int">
+			<column name="p_id" />
+		</property>
+	</class>
+</hibernate-mapping>
