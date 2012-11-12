@@ -6,11 +6,15 @@ public class Student implements Serializable{
 
    
 
-    public Student() {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	public Student() {
 
     }
 
-    public Student(long s_s_id, String s_nume, String s_prenume,
+    public Student(int s_s_id, String s_nume, String s_prenume,
 	    String s_grupa, String s_email, String s_telFix) {
     	super();
 	this.setStudentId(s_s_id);
@@ -21,11 +25,11 @@ public class Student implements Serializable{
 	this.setTelFix(s_telFix);
     }
 
-    public long getStudentId() {
+    public int getStudentId() {
 	return studentId;
     }
 
-    public void setStudentId(long s_id) {
+    public void setStudentId(int s_id) {
 	this.studentId = s_id;
     }
 
@@ -69,7 +73,7 @@ public class Student implements Serializable{
 	this.telFix = telFix;
     }
 
-    private long studentId;
+    private int studentId;
     private String nume;
     private String prenume;
     private String grupa;

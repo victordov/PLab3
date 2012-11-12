@@ -2,21 +2,21 @@
 <!DOCTYPE hibernate-mapping PUBLIC
 "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Nov 7, 2012 10:55:58 AM by Hibernate Tools 3.4.0.CR1 -->
-<hibernate-mapping>
-    <class name="md.victordov.lab.vo.Universitate" table="UNIVERSITATE">
-        <id name="universitateId" type="long">
-            <column name="UNIVERSITATEID" />
+
+<hibernate-mapping package="md.victordov.lab.vo">
+    <class name="Universitate" table="universitate">
+        <id name="universitateId" type="int">
+            <column name="u_id" />
             <generator class="assigned" />
         </id>
         <property name="numeUniversitate" type="java.lang.String">
-            <column name="NUMEUNIVERSITATE" />
+            <column name="nume_univer" />
         </property>
         <property name="adresa" type="java.lang.String">
-            <column name="ADRESA" />
+            <column name="adresa" />
         </property>
         <property name="telefon" type="java.lang.String">
-            <column name="TELEFON" />
+            <column name="telefon" />
         </property>
     </class>
 </hibernate-mapping>

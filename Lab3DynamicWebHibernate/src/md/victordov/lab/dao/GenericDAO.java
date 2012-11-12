@@ -1,10 +1,11 @@
 package md.victordov.lab.dao;
 
-import java.util.Collection;
+import java.util.List;
+
 
 public interface GenericDAO<T> {
 
-	Collection<T> retrieve();
+	List<T> retrieve();
 
 	T retrieve(int id);
 
@@ -12,6 +13,6 @@ public interface GenericDAO<T> {
 
 	boolean update(T t);
 
-	boolean delete(Long id);
+	boolean delete(int id);
 
 }

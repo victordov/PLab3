@@ -2,11 +2,13 @@ package md.victordov.lab.vo;
 
 import java.io.Serializable;
 
-import org.w3c.dom.Document;
-
 public class Universitate implements Serializable{
 
-	private long universitateId;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private int universitateId;
 	private String numeUniversitate;
 	private String adresa;
 	private String telefon;
@@ -15,7 +17,7 @@ public class Universitate implements Serializable{
 
 	}
 
-	public Universitate(long u_ID, String u_Denumirea, String u_Adresa,
+	public Universitate(int u_ID, String u_Denumirea, String u_Adresa,
 			String u_Telefon) {
 		super();
 		this.setUniversitateId(u_ID);
@@ -24,11 +26,11 @@ public class Universitate implements Serializable{
 		this.setTelefon(u_Telefon);
 	}
 
-	public long getUniversitateId() {
+	public int getUniversitateId() {
 		return universitateId;
 	}
 
-	public void setUniversitateId(long u_id) {
+	public void setUniversitateId(int u_id) {
 		this.universitateId = u_id;
 	}
 

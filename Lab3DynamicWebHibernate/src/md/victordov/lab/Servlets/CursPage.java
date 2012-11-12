@@ -38,7 +38,7 @@ public class CursPage extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		CursDAO cd = new CursDAO();
 		Curs c = new Curs();
-		c = cd.retrieve(1);
+		c = cd.retrieve(3);
 		PrintWriter out = response.getWriter();
 		out.println("<html><body>");
 		out.println(c.getNumeCurs());

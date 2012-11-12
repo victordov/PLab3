@@ -2,27 +2,27 @@
 <!DOCTYPE hibernate-mapping PUBLIC
 "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Nov 7, 2012 10:55:58 AM by Hibernate Tools 3.4.0.CR1 -->
-<hibernate-mapping>
-    <class name="md.victordov.lab.vo.Student" table="STUDENT">
-        <id name="studentId" type="long">
-            <column name="STUDENTID" />
+
+<hibernate-mapping package="md.victordov.lab.vo">
+    <class name="Student" table="student">
+        <id name="studentId" type="int">
+            <column name="s_id" />
             <generator class="assigned" />
         </id>
         <property name="nume" type="java.lang.String">
-            <column name="NUME" />
+            <column name="nume" />
         </property>
         <property name="prenume" type="java.lang.String">
-            <column name="PRENUME" />
+            <column name="prenume" />
         </property>
         <property name="grupa" type="java.lang.String">
-            <column name="GRUPA" />
+            <column name="grupa" />
         </property>
         <property name="email" type="java.lang.String">
-            <column name="EMAIL" />
+            <column name="email" />
         </property>
         <property name="telFix" type="java.lang.String">
-            <column name="TELFIX" />
+            <column name="telFix" />
         </property>
     </class>
 </hibernate-mapping>

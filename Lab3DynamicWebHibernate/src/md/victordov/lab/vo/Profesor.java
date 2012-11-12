@@ -1,12 +1,18 @@
 package md.victordov.lab.vo;
 
-public class Profesor {
+import java.io.Serializable;
 
-    public Profesor() {
+public class Profesor implements Serializable {
+
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	public Profesor() {
 
     }
 
-    public Profesor(long P_ProfesorID, String P_Nume, String P_Prenume,
+    public Profesor(int P_ProfesorID, String P_Nume, String P_Prenume,
 	    String P_Adresa) {
     	super();
 	this.profesorId = P_ProfesorID;
@@ -16,11 +22,11 @@ public class Profesor {
 
     }
 
-    public long getProfesorId() {
+    public int getProfesorId() {
 	return profesorId;
     }
 
-    public void setProfesorId(long p_id) {
+    public void setProfesorId(int p_id) {
 	this.profesorId = p_id;
     }
 
@@ -48,7 +54,7 @@ public class Profesor {
 	this.adresa = adresa;
     }
 
-    private long profesorId;
+    private int profesorId;
     private String nume;
     private String prenume;
     private String adresa;

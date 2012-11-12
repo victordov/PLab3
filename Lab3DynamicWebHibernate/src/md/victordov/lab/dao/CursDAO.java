@@ -1,29 +1,45 @@
 package md.victordov.lab.dao;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import org.hibernate.HibernateException;
+import java.io.Serializable;
+import java.util.List;
+
+
 import org.hibernate.Session;
-import md.victordov.lab.util.HibernateUtil;
+import org.hibernate.Transaction;
+
+import md.victordov.lab.ListersUtils.HibernateUtil;
+import md.victordov.lab.vo.Curs;
 import md.victordov.lab.vo.Curs;
 
-public class CursDAO implements GenericDAO<Curs> {
+
+public class CursDAO implements Serializable, GenericDAO<Curs> {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Session session;
 
 	public CursDAO() {
 
 	}
 
 	@Override
-	public Collection<Curs> retrieve() {
-		Collection<Curs> c = new ArrayList<Curs>();
-		return c;
+	public List<Curs> retrieve() {
+		session = HibernateUtil.getSessionFactory().openSession();
+		Transaction tx = session.beginTransaction();
+
+		List<Curs> list = session.createQuery("from Curs").list();
+		List<Curs> allUsers = list;
+		tx.commit();
+		return allUsers;
 	}
 
 	@Override
 	public Curs retrieve(int id) {
 		Session session = null;
 
-		session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session = HibernateUtil.getSessionFactory().openSession();
 
 		System.out.println("getting Curs instance with id: " + id);
 
@@ -39,28 +55,41 @@ public class CursDAO implements GenericDAO<Curs> {
 			System.out.println("get failed");
 			re.printStackTrace();
 			throw re;
-		} finally {
-			session.close();
 		}
 
 	}
 
 	@Override
 	public boolean create(Curs t) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean status = true;
+		
+		session = HibernateUtil.getSessionFactory().openSession();
+		Transaction tx = session.beginTransaction();
+		session.save(t);
+		tx.commit();
+		return status;
 	}
 
 	@Override
 	public boolean update(Curs t) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean succes = true;
+		session = HibernateUtil.getSessionFactory().openSession();
+		Transaction tx = session.beginTransaction();
+		session.update(t);
+		tx.commit();
+		return succes;
 	}
 
 	@Override
-	public boolean delete(Long id) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean delete(int id) {
+		boolean status = true;
+		session = HibernateUtil.getSessionFactory().openSession();
+		Transaction tx = session.beginTransaction();
+		Curs p;
+		p = (Curs) session.get(Curs.class, id);
+		session.delete(p);
+		tx.commit();
+		return status;
 	}
 
 }
