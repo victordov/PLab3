@@ -2,10 +2,16 @@ package md.victordov.lab.dao;
 
 import java.io.Serializable;
 import java.util.List;
+
+import org.hibernate.Criteria;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import md.victordov.lab.ListersUtils.HibernateUtil;
+import md.victordov.lab.common.exception.ErrorList;
+import md.victordov.lab.common.exception.MyDaoException;
+import md.victordov.lab.vo.Curs;
 import md.victordov.lab.vo.Profesor;
 
 public class ProfesorDAO implements Serializable, GenericDAO<Profesor> {
@@ -17,23 +23,30 @@ public class ProfesorDAO implements Serializable, GenericDAO<Profesor> {
 
 	private Session session;
 
-	public List<Profesor> retrieve() {
+	public List<Profesor> retrieve() throws MyDaoException {
 		session = HibernateUtil.getSessionFactory().openSession();
 		Transaction tx = session.beginTransaction();
+		List<Profesor> list = null;
+		try {
+			list = (List<Profesor>) session.createQuery("from Profesor").list();
+			tx.commit();
+		} catch (HibernateException he) {
+			if (tx != null)
+				tx.rollback();
+			throw new MyDaoException(ErrorList.RETRIEVE_LIST_ERR_KEY, he);
+		} finally {
+			session.close();
+		}
 
-		List<Profesor> list = session.createQuery("from Profesor").list();
-		List<Profesor> allUsers = list;
-		tx.commit();
-		return allUsers;
+		return list;
 
 	}
 
 	@Override
-	public Profesor retrieve(int id) {
+	public Profesor retrieve(int id) throws MyDaoException {
 
 		session = HibernateUtil.getSessionFactory().openSession();
-
-		System.out.println("getting Profesor instance with id: " + id);
+		Transaction tx = session.beginTransaction();
 
 		try {
 			Profesor instance = (Profesor) session.get(Profesor.class, id);
@@ -43,40 +56,103 @@ public class ProfesorDAO implements Serializable, GenericDAO<Profesor> {
 				System.out.println("get successful, instance found");
 			}
 			return instance;
+		} catch (HibernateException he) {
+			if (tx != null)
+				tx.rollback();
+			throw new MyDaoException(ErrorList.RETRIEVE_ERR_KEY, he);
 		} catch (RuntimeException re) {
 			System.out.println("get failed");
 			re.printStackTrace();
 			throw re;
+		} finally {
+			session.close();
 		}
+
 	}
 
-	public boolean create(Profesor t) {
-		boolean status = true;
+	public void create(Profesor t) throws MyDaoException {
+
 		session = HibernateUtil.getSessionFactory().openSession();
 		Transaction tx = session.beginTransaction();
 		session.save(t);
 		tx.commit();
-		return status;
+
 	}
 
-	public boolean update(Profesor t) {
-		boolean succes = true;
+	public void update(Profesor t) throws MyDaoException {
+
 		session = HibernateUtil.getSessionFactory().openSession();
 		Transaction tx = session.beginTransaction();
-		session.update(t);
-		tx.commit();
-		return succes;
+		try {
+			session.update(t);
+			tx.commit();
+		} catch (HibernateException he) {
+			if (tx != null)
+				tx.rollback();
+			throw new MyDaoException(ErrorList.UPDATE_ERR_KEY, he);
+		} finally {
+			session.close();
+		}
+
 	}
 
-	public boolean delete(int id) {
-		boolean status = true;
+	public void delete(int id) throws MyDaoException {
+
 		session = HibernateUtil.getSessionFactory().openSession();
 		Transaction tx = session.beginTransaction();
 		Profesor p;
-		p = (Profesor) session.get(Profesor.class, id);
-		session.delete(p);
+		try {
+			p = (Profesor) session.get(Profesor.class, id);
+			session.delete(p);
+			tx.commit();
+		} catch (HibernateException he) {
+			if (tx != null)
+				tx.rollback();
+			throw new MyDaoException(ErrorList.DELETE_ERR_KEY, he);
+		} finally {
+			session.close();
+		}
+
+	}
+
+	@Override
+	public List<Profesor> retrieve(int start, int maxRecords)
+			throws MyDaoException {
+		session = HibernateUtil.getSessionFactory().openSession();
+		Transaction tx = session.beginTransaction();
+
+		Criteria crit = session.createCriteria(Curs.class);
+		int pageIndex = start;
+		int numberOfRecordsPerPage = maxRecords;
+		int s;
+		s = (pageIndex * numberOfRecordsPerPage) - numberOfRecordsPerPage;
+		crit.setFirstResult(s);
+		crit.setMaxResults(numberOfRecordsPerPage);
+
+		List<Profesor> list = null;
+		try {
+			list = (List<Profesor>) (List<Profesor>) crit.list();
+			tx.commit();
+		} catch (HibernateException he) {
+			if (tx != null)
+				tx.rollback();
+			throw new MyDaoException(ErrorList.RETRIEVE_LIST_ERR_KEY, he);
+		} finally {
+			session.close();
+		}
+		return list;
+	}
+
+	@Override
+	public Long countSize() throws MyDaoException {
+		session = HibernateUtil.getSessionFactory().openSession();
+		Transaction tx = session.beginTransaction();
+
+		Long count = ((Long) session
+				.createQuery("select count(*) from Profesor as prof").iterate()
+				.next()).longValue();
 		tx.commit();
-		return status;
+		return count;
 	}
 
 }

@@ -6,7 +6,7 @@
 <%@ page import="md.victordov.lab.vo.Universitate"%>
 <%@ page import="java.io.PrintWriter"%>
 <%@ page import="java.util.List"%>
-<%@ page import="md.victordov.lab.dao.*" %>
+<%@ page import="md.victordov.lab.dao.*"%>
 
 <html>
 <head>
@@ -18,7 +18,7 @@
 	<%@ include file="/headerJSP.jsp"%>
 	<form method="post" action="editUniv.jsp">
 		<%
-		GenericDAO<Universitate> genDao = new UnivDAO();
+			GenericDAO<Universitate> genDao = new UnivDAO();
 			Universitate univ = new Universitate();
 			String id = request.getParameter("idUniversitate");
 			Integer no = Integer.parseInt(id);
@@ -64,12 +64,6 @@
 			univ.setNumeUniversitate(denumUniver);
 			univ.setAdresa(adresaUniver);
 			univ.setTelefon(telefonUniver);
-			if (genDao.update(univ) == true) {
-				out.print("<p>A fost Reiinoit</p>");
-			} else {
-				out.print("<p>Eroare</p>");
-			}
-
 		}
 	%>
 

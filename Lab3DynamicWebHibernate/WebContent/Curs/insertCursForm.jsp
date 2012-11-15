@@ -69,11 +69,6 @@
 			curs.setNumeCurs(numeCurs);
 			curs.setUniversitateId(univerID);
 			curs.setProfesorId(profID);
-			if (genService.create(curs) == true) {
-				out.print("<p>A fost creat Curs cu succes</p>");
-			} else {
-				out.print("<p>Eroare: Nu a fost creat Curs</p>");
-			}
 		}
 	%>
 	<a href="<%=request.getContextPath()%>/Curs/CursJSP.jsp">Apasa

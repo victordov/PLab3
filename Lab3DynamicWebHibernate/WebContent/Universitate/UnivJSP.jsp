@@ -6,7 +6,7 @@
 <%@ page import="md.victordov.lab.vo.Universitate"%>
 <%@ page import="java.io.PrintWriter"%>
 <%@ page import="java.util.List"%>
-<%@ page import="md.victordov.lab.dao.*" %>
+<%@ page import="md.victordov.lab.dao.*"%>
 <html>
 <head>
 <link href="<%=request.getContextPath()%>/style.css" rel="stylesheet"
@@ -16,7 +16,7 @@
 <body>
 	<!-- Header -->
 	<%@ include file="/headerJSP.jsp"%>
-	
+
 	<!-- Script pentru redirectionarea spre pagina de editare-->
 	<script>
 function editRecord(idUniversitate){
@@ -41,13 +41,13 @@ function deleteRecord(idUniversitate){
 		List<Universitate> univList;
 		univList = genDao.retrieve();
 	%>
-	</br>
-	</br>
-	</br>
-	</br>
+	<br />
+	<br />
+	<br />
+	<br />
 	<form method="post" name="form">
 		<table border="0" cellpadding="3">
-		<caption>Universitate</caption>
+			<caption>Universitate</caption>
 			<thead>
 				<tr>
 					<th>ID</th>
@@ -88,7 +88,13 @@ function deleteRecord(idUniversitate){
 			%>
 		</table>
 	</form>
-	
-	<a href="<%=request.getContextPath() %>/univxmldownloadservlet">Export data to XML</a>
-	
+	Marimea este:
+	<%
+		int rds;
+		rds = genDao.countSize().intValue();
+		out.println("<table><tr><td><b>" + rds + "</b></td></tr></table>");
+	%>
+	<a href="<%=request.getContextPath()%>/univxmldownloadservlet">Export
+		data to XML</a>
+
 	<%@ include file="/footerJSP.jsp"%>

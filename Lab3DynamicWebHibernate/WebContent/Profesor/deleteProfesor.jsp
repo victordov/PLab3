@@ -26,18 +26,10 @@
 		String idProfesorString = request.getParameter("id");
 		Integer idProfesor = Integer.parseInt(idProfesorString);
 
-		if (genDao.delete(idProfesor) == true) {
+		
 	%>
 	<p>Profesorul fost sters</p>
 
-	<%
-		} else {
-	%>
-	<p>Eroare, nu a putut fi sters</p>
-	<p>Stergeti referinta din alt tabel</p>
-	<%
-		}
-	%>
 	<a href="<%=request.getContextPath()%>/Profesor/ProfesorJSP.jsp">Apasa
 		aici: <strong>Profesor</strong>
 	</a>

@@ -26,19 +26,20 @@
 				String id = "0";
 				try {
 					id = request.getParameter("id");
-				} catch (Exception e) {
+				} catch (NumberFormatException  e) {
 					id = "0";
 				}
 
 				Integer no = 0;
 				try {
 					no = Integer.parseInt(id);
-				} catch (Exception e) {
+				} catch (NumberFormatException  e) {
 					no = 0;
 				}
 				curs = genService.retrieve(no);
 			%>
-			</br> </br>
+			<br />
+			<br />
 			<table>
 				<caption>Curs Edit</caption>
 				<thead>
@@ -85,11 +86,7 @@
 			curs.setNumeCurs(numeCurs);
 			curs.setUniversitateId(univerID);
 			curs.setProfesorId(profID);
-			if (genService.update(curs) == true) {
-				out.print("<p>A fost reinnoit cu succes</>");
-			} else {
-				out.print("<p>Eroare: Nu a fost reinnoit</p>");
-			}
+
 		}
 	%>
 	<a href="<%=request.getContextPath()%>/Curs/CursJSP.jsp">Apasa

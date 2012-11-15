@@ -6,7 +6,7 @@
 <%@ page import="md.victordov.lab.vo.Student"%>
 <%@ page import="java.io.PrintWriter"%>
 <%@ page import="java.util.ArrayList"%>
-<%@ page import="md.victordov.lab.dao.*" %>
+<%@ page import="md.victordov.lab.dao.*"%>
 
 <html>
 <head>
@@ -15,24 +15,13 @@
 <title>Profesor Delete</title>
 </head>
 <body>
-	
+
 	<%
 		GenericDAO<Student> genDao = new StudentDAO();
-				
+
 		Student stud = new Student();
 		String idStudentString = request.getParameter("id");
 		Integer idStudent = Integer.parseInt(idStudentString);
-
-		if (genDao.delete(idStudent) == true) {
-	%>
-	<p>A fost sters</p>
-
-	<%
-		} else {
-	%>
-	<p>Eroare, nu a putut fi sters</p>
-	<%
-		}
 	%>
 
 	<a href="<%=request.getContextPath()%>/Student/StudentJSP.jsp">Apasa

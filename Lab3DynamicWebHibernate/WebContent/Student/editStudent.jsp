@@ -77,11 +77,7 @@
 			stud.setGrupa(grupaStudent);
 			stud.setEmail(emailStudent);
 			stud.setTelFix(telefonStudent);
-			if (genDao.update(stud) == true) {
-				out.print("<p>A fost reiinoit</p>");
-			} else {
-				out.print("<p>Nu a fost reiinoit</p>");
-			}
+	
 		}
 	%>
 

@@ -2,17 +2,22 @@ package md.victordov.lab.dao;
 
 import java.util.List;
 
+import md.victordov.lab.common.exception.MyDaoException;
 
 public interface GenericDAO<T> {
 
-	List<T> retrieve();
+	List<T> retrieve() throws MyDaoException;
 
-	T retrieve(int id);
+	List<T> retrieve(int start, int maxRecords) throws MyDaoException;
 
-	boolean create(T t);
+	T retrieve(int id) throws MyDaoException;
 
-	boolean update(T t);
+	void create(T t) throws MyDaoException;
 
-	boolean delete(int id);
+	void update(T t) throws MyDaoException;
+
+	void delete(int id) throws MyDaoException;
+
+	Long countSize() throws MyDaoException;
 
 }

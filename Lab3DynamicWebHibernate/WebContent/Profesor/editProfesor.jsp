@@ -21,24 +21,24 @@
 		<form method="post" action="editProfesor.jsp">
 			<%
 				GenericDAO<Profesor> genDao = new ProfesorDAO();
-
 				Profesor prof = new Profesor();
 				String id = "0";
 				try {
 					id = request.getParameter("id");
-				} catch (Exception e) {
+				} catch (NumberFormatException  e) {
 					id = "0";
 				}
 
 				Integer no = 0;
 				try {
 					no = Integer.parseInt(id);
-				} catch (Exception e) {
+				} catch (NumberFormatException  e) {
 					no = 0;
 				}
 				prof = genDao.retrieve(no);
 			%>
-			</br> </br>
+			<br />
+			<br />
 			<table>
 				<caption>Profesor Edit</caption>
 				<tr>
@@ -81,11 +81,7 @@
 			prof.setNume(numeProfesor);
 			prof.setPrenume(prenumeProfesor);
 			prof.setAdresa(adresaProfesor);
-			if (genDao.update(prof) == true) {
-				out.print("<p>A fost reinnoit cu succes</p>");
-			} else {
-				out.print("<p>Eroare: Nu a putut fi reinnoit</p>");
-			}
+
 		}
 	%>
 	<a href="<%=request.getContextPath()%>/Profesor/ProfesorJSP.jsp">Apasa

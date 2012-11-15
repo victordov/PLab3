@@ -67,11 +67,7 @@
 			prof.setNume(numeProfesor);
 			prof.setPrenume(prenumeProfesor);
 			prof.setAdresa(adresaProfesor);
-			if (genDao.create(prof) ==true) {
-				out.print("<p>A fost adaugat cu succes</p>");
-			} else {
-				out.print("<p>Eroare: Nu a putut fi adaugat</p>");
-			}
+
 		}
 	%>
 	<a href="<%=request.getContextPath()%>/Profesor/ProfesorJSP.jsp">Apasa

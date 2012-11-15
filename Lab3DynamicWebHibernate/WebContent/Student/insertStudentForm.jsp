@@ -6,7 +6,7 @@
 <%@ page import="md.victordov.lab.vo.Student"%>
 <%@ page import="java.io.PrintWriter"%>
 <%@ page import="java.util.List"%>
-<%@ page import="md.victordov.lab.dao.*" %>
+<%@ page import="md.victordov.lab.dao.*"%>
 <html>
 <head>
 <link href="<%=request.getContextPath()%>/style.css" rel="stylesheet"
@@ -15,12 +15,13 @@
 </head>
 <body>
 	<%@ include file="/headerJSP.jsp"%>
-	<form method="post" action="<%=request.getContextPath() %>/Student/insertStudentForm.jsp">
+	<form method="post"
+		action="<%=request.getContextPath()%>/Student/insertStudentForm.jsp">
 		<%
 			GenericDAO<Student> genDao = new StudentDAO();
-					
+
 			Student stud = new Student();
-			List<Student> arrayStud ;
+			List<Student> arrayStud;
 			arrayStud = genDao.retrieve();
 		%>
 		<table>
@@ -35,10 +36,14 @@
 				<td><input type="text" name="id"
 					value="<%=genDao.retrieve().size() + 1%>"></td>
 				<td><input type="text" placeholder="Nume" name="Nume" value=""></td>
-				<td><input type="text" placeholder="Prenume" name="Prenume" value=""></td>
-				<td><input type="text" placeholder="Grupa" name="Grupa" value=""></td>
-				<td><input type="text" placeholder="Email" name="Email" value=""></td>
-				<td><input type="text" placeholder="Telefon" name="Telefon" value=""></td>
+				<td><input type="text" placeholder="Prenume" name="Prenume"
+					value=""></td>
+				<td><input type="text" placeholder="Grupa" name="Grupa"
+					value=""></td>
+				<td><input type="text" placeholder="Email" name="Email"
+					value=""></td>
+				<td><input type="text" placeholder="Telefon" name="Telefon"
+					value=""></td>
 			</tr>
 			<tr>
 				<td><input type="submit" name="Submit" value="Insert"
@@ -72,12 +77,6 @@
 			stud.setGrupa(grupaStudent);
 			stud.setEmail(emailStudent);
 			stud.setTelFix(telefonStudent);
-
-			if (genDao.create(stud) == true) {
-				out.print("<p>A fost adaugat cu succes<p>");
-			} else {
-				out.print("<p>Eroare:Nu a fost adaugat nimic<p>");
-			}
 
 		}
 	%>

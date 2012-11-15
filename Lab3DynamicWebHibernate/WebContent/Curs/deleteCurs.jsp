@@ -26,18 +26,10 @@
 		String idCursString = request.getParameter("id");
 		Integer idCurs = Integer.parseInt(idCursString);
 
-		if (genService.delete(idCurs) == true) {
 	%>
 	<p>Curs fost sters</p>
 
-	<%
-		} else {
-	%>
-	<p>Eroare, nu a putut fi sters</p>
-	<p>Stergeti referinta din alt tabel</p>
-	<%
-		}
-	%>
+	
 	<a href="<%=request.getContextPath()%>/Curs/CursJSP.jsp">Apasa
 		aici: Curs</a>
 	<br />

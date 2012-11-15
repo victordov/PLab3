@@ -61,11 +61,6 @@
 			univ.setNumeUniversitate(denumUniver);
 			univ.setAdresa(adresaUniver);
 			univ.setTelefon(telefonUniver);
-			if (genDao.create(univ) == true) {
-				out.print("<p>A fost adaugata universitate</p>");
-			} else {
-				out.print("<p>Eroare: nu a fost aduagate date</p>");
-			}
 		}
 	%>
 	<a href="<%=request.getContextPath()%>/Universitate/UnivJSP.jsp">Apasa

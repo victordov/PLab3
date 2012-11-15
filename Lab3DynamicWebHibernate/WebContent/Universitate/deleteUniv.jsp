@@ -6,7 +6,7 @@
 <%@ page import="md.victordov.lab.vo.Universitate"%>
 <%@ page import="java.io.PrintWriter"%>
 <%@ page import="java.util.List"%>
-<%@ page import="md.victordov.lab.dao.*" %>
+<%@ page import="md.victordov.lab.dao.*"%>
 
 <html>
 <head>
@@ -20,25 +20,13 @@
 	<%@ include file="/headerJSP.jsp"%>
 
 	<%
-	GenericDAO<Universitate> genDao = new UnivDAO();
+		GenericDAO<Universitate> genDao = new UnivDAO();
 		Universitate univ = new Universitate();
 		String idUniverString = request.getParameter("idUniversitate");
 		Integer idUniversitate = Integer.parseInt(idUniverString);
-
-		if (genDao.delete(idUniversitate) == true) {
 	%>
-	<p>A fost sters</p>
-
-	<%
-		} else {
-	%>
-	<p>Eroare, nu a putut fi sters</p>
-	<%
-		}
-	%>
-
-	<a href="<%=request.getContextPath()%>/Universitate/UnivJSP.jsp">Apasa
-		aici: <strong>Universitate</strong>
+	<a href="<%=request.getContextPath()%>/Universitate/UnivJSP.jsp">Apasaaici:
+		<strong>Universitate</strong>
 	</a>
 
 	<!-- Footer -->

@@ -42,10 +42,10 @@ function deleteRecord(id){
 		List<Student> studList;
 		studList = genDao.retrieve();
 	%>
-	</br>
-	</br>
-	</br>
-	</br>
+	<br />
+	<br />
+	<br />
+	<br />
 	<form method="post" name="form">
 		<table border="0" cellpadding="3">
 			<caption>Student</caption>
