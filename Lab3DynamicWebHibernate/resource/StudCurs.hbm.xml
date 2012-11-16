@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="md.victordov.lab.vo">
+    <class name="StudCurs" table="STUD_CURS">
+        <id name="stud_curs_id" type="int">
+            <column name="SC_ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="student_id" type="int">
+            <column name="S_ID" />
+        </property>
+        <property name="curs_id" type="int">
+            <column name="C_ID" />
+        </property>
+    </class>
+</hibernate-mapping>

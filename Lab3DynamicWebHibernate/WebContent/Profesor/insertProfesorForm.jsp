@@ -67,6 +67,7 @@
 			prof.setNume(numeProfesor);
 			prof.setPrenume(prenumeProfesor);
 			prof.setAdresa(adresaProfesor);
+			genDao.create(prof);
 
 		}
 	%>

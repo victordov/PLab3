@@ -24,6 +24,7 @@
 		Universitate univ = new Universitate();
 		String idUniverString = request.getParameter("idUniversitate");
 		Integer idUniversitate = Integer.parseInt(idUniverString);
+		genDao.delete(idUniversitate);
 	%>
 	<a href="<%=request.getContextPath()%>/Universitate/UnivJSP.jsp">Apasaaici:
 		<strong>Universitate</strong>

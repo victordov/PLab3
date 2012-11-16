@@ -20,4 +20,4 @@
 <br>
 <%out.print(getServletContext().getRealPath("/data"));%>
 <!-- Footer -->
-<%@ include file=" /footerJSP.jsp"%>
+<%@ include file="/footerJSP.jsp"%>

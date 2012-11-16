@@ -22,10 +22,10 @@
 
 	<form method="post" action="insertCursForm.jsp">
 		<%
-			GenericDAO<Curs> genService = new CursDAO();
+			GenericDAO<Curs> genDao = new CursDAO();
 			Curs curs = new Curs();
 			List<Curs> arrayCurs ;
-			arrayCurs = genService.retrieve();
+			arrayCurs = genDao.retrieve();
 		%>
 		<table>
 			<caption>Curs Insert</caption>
@@ -37,7 +37,7 @@
 			</tr>
 			<tr>
 				<td><input type="text" name="id"
-					value="<%=genService.retrieve().size() + 1%>"></td>
+					value="<%=genDao.retrieve().size() + 1%>"></td>
 				<td><input type="text" name="Nume" value=""></td>
 				<td><input type="text" name="UniverID" value=""></td>
 				<td><input type="text" name="ProfID" value=""></td>
@@ -69,6 +69,7 @@
 			curs.setNumeCurs(numeCurs);
 			curs.setUniversitateId(univerID);
 			curs.setProfesorId(profID);
+			genDao.create(curs);
 		}
 	%>
 	<a href="<%=request.getContextPath()%>/Curs/CursJSP.jsp">Apasa

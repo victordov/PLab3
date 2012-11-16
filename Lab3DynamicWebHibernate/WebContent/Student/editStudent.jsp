@@ -28,11 +28,13 @@
 		</br> </br>
 		<table>
 			<caption>Student Edit</caption>
+			<tr>
 			<th>Nume</th>
 			<th>Prenume</th>
 			<th>Grupa</th>
 			<th>Email</th>
 			<th>Telefon</th>
+			</tr>
 			<tr>
 				<td><input type="text" name="Nume" value="<%=stud.getNume()%>"></td>
 				<td><input type="text" name="Prenume"
@@ -77,6 +79,7 @@
 			stud.setGrupa(grupaStudent);
 			stud.setEmail(emailStudent);
 			stud.setTelFix(telefonStudent);
+			genDao.update(stud);
 	
 		}
 	%>

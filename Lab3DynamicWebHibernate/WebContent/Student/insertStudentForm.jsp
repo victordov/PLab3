@@ -11,7 +11,7 @@
 <head>
 <link href="<%=request.getContextPath()%>/style.css" rel="stylesheet"
 	type="text/css">
-<title>Universitate Edit</title>
+<title>Student Edit</title>
 </head>
 <body>
 	<%@ include file="/headerJSP.jsp"%>
@@ -26,12 +26,14 @@
 		%>
 		<table>
 			<caption>Student Insert</caption>
+			<tr>
 			<th>ID</th>
 			<th>Nume</th>
 			<th>Prenume</th>
 			<th>Grupa</th>
 			<th>Email</th>
 			<th>Telefon</th>
+			</tr>
 			<tr>
 				<td><input type="text" name="id"
 					value="<%=genDao.retrieve().size() + 1%>"></td>
@@ -77,6 +79,7 @@
 			stud.setGrupa(grupaStudent);
 			stud.setEmail(emailStudent);
 			stud.setTelFix(telefonStudent);
+			genDao.create(stud);
 
 		}
 	%>

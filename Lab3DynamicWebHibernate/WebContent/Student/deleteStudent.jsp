@@ -22,6 +22,7 @@
 		Student stud = new Student();
 		String idStudentString = request.getParameter("id");
 		Integer idStudent = Integer.parseInt(idStudentString);
+		genDao.delete(idStudent);
 	%>
 
 	<a href="<%=request.getContextPath()%>/Student/StudentJSP.jsp">Apasa

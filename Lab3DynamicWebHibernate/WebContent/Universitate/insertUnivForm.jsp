@@ -61,6 +61,7 @@
 			univ.setNumeUniversitate(denumUniver);
 			univ.setAdresa(adresaUniver);
 			univ.setTelefon(telefonUniver);
+			genDao.create(univ);
 		}
 	%>
 	<a href="<%=request.getContextPath()%>/Universitate/UnivJSP.jsp">Apasa

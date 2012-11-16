@@ -21,10 +21,11 @@
 	<%@ include file="/headerJSP.jsp"%>
 
 	<%
-		GenericDAO<Curs> genService = new CursDAO();
+		GenericDAO<Curs> genDao = new CursDAO();
 		Curs curs = new Curs();
 		String idCursString = request.getParameter("id");
 		Integer idCurs = Integer.parseInt(idCursString);
+		genDao.delete(idCurs);
 
 	%>
 	<p>Curs fost sters</p>

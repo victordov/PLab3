@@ -9,11 +9,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.*;
+
 /**
  * Servlet implementation class ErrorHandler
  */
 @WebServlet("/ErrorHandler")
 public class ErrorHandler extends HttpServlet {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private static Logger logger = LogManager.getLogger(ErrorHandler.class);
 
 	// Method to handle GET method request.
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -51,8 +58,11 @@ public class ErrorHandler extends HttpServlet {
 		} else if (statusCode != null) {
 			out.println("The status code : " + statusCode);
 		} else {
+			logger.error("Error information");
 			out.println("<h2>Error information</h2>");
 			out.println("Servlet Name : " + servletName + "</br></br>");
+			logger.error("Servlet Name : " + servletName );
+			logger.error("Exception Type : " + throwable.getClass().getName());
 			out.println("Exception Type : " + throwable.getClass().getName()
 					+ "</br></br>");
 			out.println("The request URI: " + requestUri + "<br><br>");

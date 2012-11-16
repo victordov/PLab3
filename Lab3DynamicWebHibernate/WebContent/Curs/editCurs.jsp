@@ -21,7 +21,7 @@
 	<div id="wrapper">
 		<form method="post" action="editCurs.jsp">
 			<%
-				GenericDAO<Curs> genService = new CursDAO();
+				GenericDAO<Curs> genDao = new CursDAO();
 				Curs curs = new Curs();
 				String id = "0";
 				try {
@@ -36,7 +36,7 @@
 				} catch (NumberFormatException  e) {
 					no = 0;
 				}
-				curs = genService.retrieve(no);
+				curs = genDao.retrieve(no);
 			%>
 			<br />
 			<br />
@@ -86,6 +86,7 @@
 			curs.setNumeCurs(numeCurs);
 			curs.setUniversitateId(univerID);
 			curs.setProfesorId(profID);
+			genDao.update(curs);
 
 		}
 	%>

@@ -25,7 +25,7 @@
 		Profesor prof = new Profesor();
 		String idProfesorString = request.getParameter("id");
 		Integer idProfesor = Integer.parseInt(idProfesorString);
-
+		genDao.delete(idProfesor);
 		
 	%>
 	<p>Profesorul fost sters</p>

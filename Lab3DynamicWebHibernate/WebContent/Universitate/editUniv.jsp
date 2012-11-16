@@ -64,6 +64,7 @@
 			univ.setNumeUniversitate(denumUniver);
 			univ.setAdresa(adresaUniver);
 			univ.setTelefon(telefonUniver);
+			genDao.update(univ);
 		}
 	%>
 
