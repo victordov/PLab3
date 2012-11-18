@@ -11,7 +11,6 @@ import org.hibernate.Transaction;
 import md.victordov.lab.ListersUtils.HibernateUtil;
 import md.victordov.lab.common.exception.ErrorList;
 import md.victordov.lab.common.exception.MyDaoException;
-import md.victordov.lab.vo.Curs;
 import md.victordov.lab.vo.Profesor;
 
 public class ProfesorDAO implements Serializable, GenericDAO<Profesor> {
@@ -121,7 +120,7 @@ public class ProfesorDAO implements Serializable, GenericDAO<Profesor> {
 		session = HibernateUtil.getSessionFactory().openSession();
 		Transaction tx = session.beginTransaction();
 
-		Criteria crit = session.createCriteria(Curs.class);
+		Criteria crit = session.createCriteria(Profesor.class);
 		int pageIndex = start;
 		int numberOfRecordsPerPage = maxRecords;
 		int s;

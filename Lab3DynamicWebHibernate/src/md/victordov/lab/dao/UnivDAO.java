@@ -6,7 +6,7 @@ import java.util.List;
 import md.victordov.lab.ListersUtils.HibernateUtil;
 import md.victordov.lab.common.exception.ErrorList;
 import md.victordov.lab.common.exception.MyDaoException;
-import md.victordov.lab.vo.Curs;
+import md.victordov.lab.vo.Universitate;
 import md.victordov.lab.vo.Universitate;
 import md.victordov.lab.vo.Universitate;
 
@@ -140,7 +140,7 @@ public class UnivDAO implements GenericDAO<Universitate>, Serializable {
 		session = HibernateUtil.getSessionFactory().openSession();
 		Transaction tx = session.beginTransaction();
 
-		Criteria crit = session.createCriteria(Curs.class);
+		Criteria crit = session.createCriteria(Universitate.class);
 		int pageIndex = start;
 		int numberOfRecordsPerPage = maxRecords;
 		int s;

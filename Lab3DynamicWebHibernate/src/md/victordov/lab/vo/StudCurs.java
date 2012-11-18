@@ -15,11 +15,13 @@ public class StudCurs implements Serializable {
 	private int stud_curs_id;
 	private int student_id;
 	private int curs_id;
+	private Curs curs;
+	private Student student;
 
-	public StudCurs(){
-		
+	public StudCurs() {
+
 	}
-	
+
 	public int getStud_curs_id() {
 		return stud_curs_id;
 	}
@@ -42,6 +44,22 @@ public class StudCurs implements Serializable {
 
 	public void setCurs_id(int curs_id) {
 		this.curs_id = curs_id;
+	}
+
+	public Curs getCurs() {
+		return curs;
+	}
+
+	public void setCurs(Curs curs) {
+		this.curs = curs;
+	}
+
+	public Student getStudent() {
+		return student;
+	}
+
+	public void setStudent(Student student) {
+		this.student = student;
 	}
 
 }

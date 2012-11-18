@@ -149,7 +149,7 @@ public class StudCursDAO implements Serializable, GenericDAO<StudCurs> {
 
 		Long count = ((Long) session
 				.createQuery(
-						"select count(*) from STUC_StudCurs as studentStudCurs")
+						"select count(*) from StudCurs as studentStudCurs")
 				.iterate().next()).longValue();
 		tx.commit();
 		return count;

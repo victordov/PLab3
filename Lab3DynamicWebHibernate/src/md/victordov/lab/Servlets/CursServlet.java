@@ -3,7 +3,6 @@ package md.victordov.lab.Servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Iterator;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,11 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 
 import md.victordov.lab.ListersUtils.HibernateUtil;
-import md.victordov.lab.vo.Curs;
+import md.victordov.lab.vo.*;
 
 /**
  * Servlet implementation class CursJSP
@@ -40,23 +39,22 @@ public class CursServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		Criteria crit = session.createCriteria(Curs.class);
-		int pageIndex = 2;
-		int numberOfRecordsPerPage = 5;
-		int s;
-		s = (pageIndex * numberOfRecordsPerPage) - numberOfRecordsPerPage;
-		crit.setFirstResult(s);
-		crit.setMaxResults(numberOfRecordsPerPage);
-		List<Curs> l = (List<Curs>) crit.list();
-		Iterator<Curs> it = l.iterator();
-		out.println("<table border=1");
-		while (it.hasNext()) {
-			Curs c = (Curs) it.next();
+		String sql_query = "from StudCurs as sc inner join sc.student  inner join sc.curs ";
+		Query query = session.createQuery(sql_query);
+		out.println("<table align=\"center\">");
+		for (Iterator it = query.iterate(); it.hasNext();) {
 			out.println("<tr>");
-			out.println("<td>" + c.getCursId() + "</td>");
-			out.println("<td>" + c.getNumeCurs() + "</td>");
-			out.println("<td>" + c.getUniversitateId() + "</td>");
-			out.println("<td>" + c.getProfesorId() + "</td>");
+			Object[] row = (Object[]) it.next();
+			Student tmpStudent = new Student();
+			tmpStudent = (Student) row[1];
+			Curs tmpCurs = new Curs();
+			tmpCurs = (Curs) row[2];
+			out.println("<td>ID Student: " + tmpStudent.getStudentId()
+					+ "</td>");
+			out.println("<td>" + tmpStudent.getNume() + " "
+					+ tmpStudent.getPrenume() + "</td>");
+			out.println("<td>" + tmpCurs.getNumeCurs() + "</td>");
+			out.println("<td>Id Curs:" + tmpCurs.getCursId() + "</td>");
 			out.println("</tr>");
 		}
 		out.println("</table>");

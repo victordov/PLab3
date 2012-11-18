@@ -9,72 +9,71 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.*;
-
 /**
  * Servlet implementation class ErrorHandler
  */
+
 @WebServlet("/ErrorHandler")
 public class ErrorHandler extends HttpServlet {
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static Logger logger = LogManager.getLogger(ErrorHandler.class);
 
-	// Method to handle GET method request.
-	public void doGet(HttpServletRequest request, HttpServletResponse response)
+	public void doGet(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
-		// Analyze the servlet exception
-		Throwable throwable = (Throwable) request
+		res.setContentType("text/html");
+		PrintWriter out = res.getWriter();
+
+		String code = null, message = null, type = null, uri = null;
+		Object codeObj, messageObj, typeObj;
+		Throwable throwable;
+
+		// Retrieve the three possible error attributes, some may be null
+		codeObj = req.getAttribute("javax.servlet.error.status_code");
+		messageObj = req.getAttribute("javax.servlet.error.message");
+		typeObj = req.getAttribute("javax.servlet.error.exception_type");
+		throwable = (Throwable) req
 				.getAttribute("javax.servlet.error.exception");
-		Integer statusCode = (Integer) request
-				.getAttribute("javax.servlet.error.status_code");
-		String servletName = (String) request
-				.getAttribute("javax.servlet.error.servlet_name");
-		if (servletName == null) {
-			servletName = "Unknown";
-		}
-		String requestUri = (String) request
-				.getAttribute("javax.servlet.error.request_uri");
-		if (requestUri == null) {
-			requestUri = "Unknown";
+		uri = (String) req.getAttribute("javax.servlet.error.request_uri");
+
+		if (uri == null) {
+			uri = req.getRequestURI(); // in case there's no URI given
 		}
 
-		// Set response content type
-		response.setContentType("text/html");
+		// Convert the attributes to string values
+		if (codeObj != null)
+			code = codeObj.toString();
+		if (messageObj != null)
+			message = messageObj.toString();
+		if (typeObj != null)
+			type = typeObj.toString();
 
-		PrintWriter out = response.getWriter();
-		String title = "Error/Exception Information";
-		String docType = "<!doctype html >\n";
-		out.println(docType + "<html>\n" + "<head><title>" + title
-				+ "</title></head>\n" + "<body bgcolor=\"#f0f0f0\">\n");
+		// The error reason is either the status code or exception type
+		String reason = (code != null ? code : type);
 
-		if (throwable == null && statusCode == null) {
-			out.println("<h2>Error information is missing</h2>");
-			out.println("Please return to the <a href=\""
-					+ response.encodeURL("http://localhost:8080/")
-					+ "\">Home Page</a>.");
-		} else if (statusCode != null) {
-			out.println("The status code : " + statusCode);
-		} else {
-			logger.error("Error information");
-			out.println("<h2>Error information</h2>");
-			out.println("Servlet Name : " + servletName + "</br></br>");
-			logger.error("Servlet Name : " + servletName );
-			logger.error("Exception Type : " + throwable.getClass().getName());
-			out.println("Exception Type : " + throwable.getClass().getName()
-					+ "</br></br>");
-			out.println("The request URI: " + requestUri + "<br><br>");
-			out.println("The exception message: " + throwable.getMessage());
+		out.println("<HTML>");
+		out.println("<HEAD><TITLE>" + reason + ": " + message
+				+ "</TITLE></HEAD>");
+		out.println("<BODY>");
+		out.println("<H1>" + reason + "</H1>");
+		//out.println("<H2>" + message + "</H2>");
+		out.println("<H2>");
+		for(int i=0; i<message.length(); i++){
+			out.println(message.charAt(i));
+			if(message.charAt(i)=='\n'){
+				out.println("<br />");
+			}
 		}
-		out.println("</body>");
-		out.println("</html>");
-	}
-
-	// Method to handle POST method request.
-	public void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		doGet(request, response);
+		out.println("</H2>");
+		out.println("<PRE>");
+		if (throwable != null) {
+			throwable.printStackTrace(out);
+		}
+		out.println("</PRE>");
+		out.println("<HR>");
+		out.println("<I>Error accessing " + uri + "</I>");
+		out.println("</BODY></HTML>");
 	}
 }

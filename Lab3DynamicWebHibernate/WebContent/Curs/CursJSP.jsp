@@ -9,6 +9,7 @@
 <%@ page import="java.io.PrintWriter"%>
 <%@ page import="java.util.List"%>
 <%@ page import="md.victordov.lab.dao.*"%>
+<%@ page import="md.victordov.lab.common.exception.MyDaoException"%>
 
 <html>
 <head>
@@ -45,6 +46,7 @@ function deleteRecord(id){
 
 		int pageNr = 1;
 		int pageSize = 2;
+		GenericDAO<Curs> genDao = null;
 		try {
 			if (request.getParameter("pageNr") != null) {
 				pageNr = Integer.parseInt(request.getParameter("pageNr"));
@@ -52,8 +54,11 @@ function deleteRecord(id){
 		} catch (Exception e) {
 			pageNr = 1;
 		}
-		GenericDAO<Curs> genDao = new CursDAO();
-		List<Curs> cursList;
+
+		genDao = new CursDAO();
+
+		List<Curs> cursList = null;
+
 		cursList = genDao.retrieve(pageNr, pageSize);
 	%>
 	<br />
@@ -74,10 +79,9 @@ function deleteRecord(id){
 				</tr>
 			</thead>
 			<%
+				int countID = 0;
 				int cursListSize = 0;
 				cursListSize = genDao.countSize().intValue();
-				out.println("<b>" + cursListSize + "</b>");
-				int countID = 0;
 				int ox = (pageNr * pageSize) - pageSize;
 				for (int i = 0; (i < pageSize) && (i < cursList.size()); i++) {
 			%>

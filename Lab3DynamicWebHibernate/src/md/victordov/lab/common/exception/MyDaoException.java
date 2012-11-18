@@ -26,5 +26,4 @@ public class MyDaoException extends Exception {
 	public String getMsg() {
 		return msgAtribute;
 	}
-
 }

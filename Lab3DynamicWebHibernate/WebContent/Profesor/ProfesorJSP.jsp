@@ -3,10 +3,10 @@
 <%@ page import="md.*"%>
 <%@ page import="md.victordov.lab.vo.*"%>
 <%@ page import="md.victordov.lab.dao.ProfesorDAO"%>
-<%@ page import="md.victordov.lab.vo.Universitate"%>
+<%@ page import="md.victordov.lab.vo.Profesor"%>
 <%@ page import="java.io.PrintWriter"%>
 <%@ page import="java.util.List"%>
-<%@ page import="md.victordov.lab.dao.*" %>
+<%@ page import="md.victordov.lab.dao.*"%>
 
 <html>
 <head>
@@ -39,13 +39,22 @@ function deleteRecord(id){
 </script>
 
 	<%
-	GenericDAO<Profesor> genDao = new ProfesorDAO();
-	List<Profesor> profList ;
-	profList = genDao.retrieve();
-%>
-	</br>
-	</br>
-	</br>
+		int pageNr = 1;
+		int pageSize = 2;
+		try {
+			if (request.getParameter("pageNr") != null) {
+				pageNr = Integer.parseInt(request.getParameter("pageNr"));
+			}
+		} catch (Exception e) {
+			pageNr = 1;
+		}
+		GenericDAO<Profesor> genDao = new ProfesorDAO();
+		List<Profesor> profList;
+		profList = genDao.retrieve(pageNr, pageSize);
+	%>
+	<br />
+	<br />
+	<br />
 	<form method="post" name="form">
 		<table>
 			<caption>Profesor</caption>
@@ -61,9 +70,12 @@ function deleteRecord(id){
 				</tr>
 			</thead>
 			<%
-			int countID = 0;
-			for (int i = 0; i < profList.size(); i++) {
-		%>
+			int profListSize = 0;
+			profListSize = genDao.countSize().intValue();
+				int countID = 0;
+				int ox = (pageNr * pageSize) - pageSize;
+				for (int i = 0; (i < pageSize) && (i < profList.size()); i++) {
+			%>
 			<tr>
 				<td><%=profList.get(i).getProfesorId()%></td>
 				<td><%=profList.get(i).getNume()%></td>
@@ -77,20 +89,42 @@ function deleteRecord(id){
 					onclick="deleteRecord(<%=profList.get(i).getProfesorId()%>);"></td>
 			</tr>
 			<%
-			}
-		%>
+				}
+			%>
 			<tr>
 				<td align="right" colspan="<%=profList.size()%>">
 					<%
-					out.print("<td rowspan = \""
-							+ profList.size()
-							+ "\"><a href=\"insertProfesorForm.jsp\"><input type=\"button\" name=\"insert\"");
-					out.print(" value=\"Insert\" style=\"background-color:blue;font-weight:bold;color:white;\" ></a></td>");
-				%>
+						out.print("<td rowspan = \""
+								+ profList.size()
+								+ "\"><a href=\"insertProfesorForm.jsp\"><input type=\"button\" name=\"insert\"");
+						out.print(" value=\"Insert\" style=\"background-color:blue;font-weight:bold;color:white;\" ></a></td>");
+					%>
 				</td>
 			</tr>
 		</table>
 	</form>
+	<br />
+		<table>
+		<tr>
+			<%
+				int pageFor = (int) Math.ceil((double) profListSize
+						/ (double) pageSize);
+				for (int i = 1; i <= pageFor; i++) {
+					if (i == pageNr) {
+						out.println("<td><b><a href=\"" + request.getContextPath()
+								+ "/Profesor/ProfesorJSP.jsp?pageNr=" + i + "\">" + i
+								+ "</a></b></td>");
+					} else {
+						out.println("<td><a href=\"" + request.getContextPath()
+								+ "/Profesor/ProfesorJSP.jsp?pageNr=" + i + "\">" + i
+								+ "</a></td>");
+					}
+
+				}
+			%>
+		</tr>
+	</table>
+	<br />
 	<a href="<%=request.getContextPath()%>/profesorxmldownloadservlet">Export
 		to XML</a>
 	<!-- Footer -->

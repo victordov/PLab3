@@ -38,9 +38,20 @@ function deleteRecord(id){
 </script>
 
 	<%
+		//response.sendRedirect("error.jsp?msg="+ e.message());
+
+		int pageNr = 1;
+		int pageSize = 2;
+		try {
+			if (request.getParameter("pageNr") != null) {
+				pageNr = Integer.parseInt(request.getParameter("pageNr"));
+			}
+		} catch (Exception e) {
+			pageNr = 1;
+		}
 		GenericDAO<Student> genDao = new StudentDAO();
 		List<Student> studList;
-		studList = genDao.retrieve();
+		studList = genDao.retrieve(pageNr, pageSize);
 	%>
 	<br />
 	<br />
@@ -64,7 +75,10 @@ function deleteRecord(id){
 			</thead>
 			<%
 				int countID = 0;
-				for (int i = 0; i < studList.size(); i++) {
+				int studListSize = 0;
+				studListSize = genDao.countSize().intValue();
+				int ox = (pageNr * pageSize) - pageSize;
+				for (int i = 0; (i < pageSize) && (i < studList.size()); i++) {
 			%>
 			<tr>
 				<td><%=studList.get(i).getStudentId()%></td>
@@ -97,8 +111,28 @@ function deleteRecord(id){
 			</tr>
 		</table>
 	</form>
-	<a href="<%=request.getContextPath()%>/studentxmldownloadservlet">Export
-		to XML</a>
+	<br />
+	<table>
+		<tr>
+			<%
+				int pageFor = (int) Math.ceil((double) studListSize
+						/ (double) pageSize);
+				for (int i = 1; i <= pageFor; i++) {
+					if (i == pageNr) {
+						out.println("<td><b><a href=\"" + request.getContextPath()
+								+ "/Student/StudentJSP.jsp?pageNr=" + i + "\">" + i
+								+ "</a></b></td>");
+					} else {
+						out.println("<td><a href=\"" + request.getContextPath()
+								+ "/Student/StudentJSP.jsp?pageNr=" + i + "\">" + i
+								+ "</a></td>");
+					}
+
+				}
+			%>
+		</tr>
+	</table>
+	<br />
 
 	<!-- Footer -->
 	<%@ include file="/footerJSP.jsp"%>
